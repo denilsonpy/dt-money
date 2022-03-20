@@ -1,27 +1,9 @@
 import * as S from "./styles";
-import { useEffect, useState } from "react";
+import { useTransactions } from '../../hooks/useTransactions';
 
-import { api } from "../../services/axios";
-
-type Transaction = {
-  id: string;
-  title: string;
-  amount: number;
-  type: string;
-  category: string;
-  createdAt: Date;
-};
 
 export function TransactionsTable() {
-  const [transactions, setTransactions] = useState<Transaction[]>(
-    [] as Transaction[]
-  );
-
-  useEffect(() => {
-    api
-      .get("transactions")
-      .then((response) => setTransactions(response.data.transactions));
-  }, []);
+  const { transactions } = useTransactions();
 
   return (
     <S.Container>
